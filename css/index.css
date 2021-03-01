@@ -5,6 +5,8 @@
     --blue: rgb(73, 178, 248);
     --transparent: rgba(255, 255, 255, 0);
     --grey: rgba(158, 158, 158, 1);
+
+    /* font-family: 'BioRhyme', serif; */
 }
 
 body {
@@ -27,6 +29,10 @@ body {
     width: 60%;
     max-width: 60%;
 }
+
+/* #innerLeft {
+    margin: 5rem;
+} */
 
 #right {
     min-height: 100vh;
