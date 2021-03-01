@@ -8,14 +8,20 @@ const dateSelector = document.getElementById('cycleDate');
 const circle = document.getElementById('moon');
 const div = document.getElementById('right')
 
-dateSelector.oninput = () => {
-    console.log(dateSelector.value);
-
-    if (circle) {
-        circle.style.left = `calc(60% + ${moonOffsetVar}px)`;
-        console.log(moonOffsetVar);
+// from https://gist.github.com/john-doherty/2ad94360771902b16f459f590b833d44
+function trimSvgWhitespace() {
+    // get all SVG objects in the DOM
+    var svgs = document.getElementsByTagName("svg");
+    // go through each one and add a viewbox that ensures all children are visible
+    for (var i=0, l=svgs.length; i<l; i++) {
+      var svg = svgs[i],
+          box = svg.getBBox(), // <- get the visual boundary required to view all children
+          viewBox = [box.x, box.y, box.width, box.height].join(" ");
+      // set viewable area based on value above
+      svg.setAttribute("viewBox", viewBox);
     }
-}
+  }
+trimSvgWhitespace();
 
 if (div) {
     div.innerHTML = fullDate;
@@ -38,19 +44,26 @@ function moonCycle (year, month, day) {
 }
 
 // WIP - needs to be converted to modal with 11 as the full moon and 0 and 29 as the new moon 
-function moonOffset () {
+function moonOffset (year, month, day) {
     const pixelOffsetIncrement = 200 / 15;
     // let cyclePhase = moonCycle(year, month, date);
-    let cyclePhase = moonCycle(year, month, dateSelector.value);
+    let cyclePhase = moonCycle(year, month, day);
     if (cyclePhase > 15) {
         cyclePhase = 15 - (cyclePhase - 15);
     } 
     return Math.round(cyclePhase * pixelOffsetIncrement);
 }
 
-let moonOffsetVar = moonOffset();
+// let moonOffsetVar = moonOffset();
 
-
-if (circle) {
-    circle.style.left = `calc( 60%  + ${moonOffsetVar}px)`;
+dateSelector.oninput = () => {
+    console.log(dateSelector.value);
+    if (circle) {
+        circle.style.left = `calc(60% + ${moonOffset(year, month, dateSelector.value) - 200}px)`;
+        console.log(moonOffset(year, month, dateSelector.value));
+    }
 }
+
+// if (circle) {
+//     circle.style.left = `calc( 60%  + ${moonOffsetVar}px)`;
+// }
