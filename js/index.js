@@ -5,8 +5,10 @@ const fullDate = [date, month, year]
 
 // DOM selectors
 const dateSelector = document.getElementById('cycleDate');
+const monthSelector = document.getElementById('cycleMonth');
+const yearSelector = document.getElementById('cycleYear');
 const circle = document.getElementById('moon');
-const div = document.getElementById('right')
+const div = document.getElementById('right');
 
 // from https://gist.github.com/john-doherty/2ad94360771902b16f459f590b833d44
 function trimSvgWhitespace() {
@@ -43,7 +45,7 @@ function moonCycle (year, month, day) {
     return (r < 0) ? r + 30 : r;
 }
 
-// WIP - needs to be converted to modal with 11 as the full moon and 0 and 29 as the new moon 
+// modal offset of moon svg 
 function moonOffset (year, month, day) {
     const pixelOffsetIncrement = 200 / 15;
     // let cyclePhase = moonCycle(year, month, date);
@@ -54,16 +56,28 @@ function moonOffset (year, month, day) {
     return Math.round(cyclePhase * pixelOffsetIncrement);
 }
 
-// let moonOffsetVar = moonOffset();
-
+// modify moon position 
 dateSelector.oninput = () => {
     console.log(dateSelector.value);
     if (circle) {
-        circle.style.left = `calc(60% + ${moonOffset(year, month, dateSelector.value) - 200}px)`;
+        circle.style.left = `calc(60% + ${moonOffset(yearSelector.value, monthSelector.value, dateSelector.value) - 200}px)`;
         console.log(moonOffset(year, month, dateSelector.value));
     }
 }
 
-// if (circle) {
-//     circle.style.left = `calc( 60%  + ${moonOffsetVar}px)`;
-// }
+monthSelector.oninput = () => {
+    console.log(dateSelector.value);
+    if (circle) {
+        circle.style.left = `calc(60% + ${moonOffset(yearSelector.value, monthSelector.value, dateSelector.value) - 200}px)`;
+        console.log(moonOffset(year, month, dateSelector.value));
+    }
+}
+
+yearSelector.oninput = () => {
+    console.log(dateSelector.value);
+    if (circle) {
+        circle.style.left = `calc(60% + ${moonOffset(yearSelector.value, monthSelector.value, dateSelector.value) - 200}px)`;
+        console.log(moonOffset(year, month, dateSelector.value));
+    }
+}
+
