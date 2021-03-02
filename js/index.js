@@ -67,9 +67,12 @@ function setPosition () {
     if (circle) {
         circle.style.left = `calc(60% + ${moonOffset(yearSelector.value, monthSelector.value, dateSelector.value) - 200}px)`;
         console.log(moonOffset(yearSelector.value, monthSelector.value, dateSelector.value));
-
     }
 }
+
+// set moon position to current date on load
+window.onload = setPosition;
+
 
 dateSelector.oninput = setPosition;
 monthSelector.oninput = setPosition;
