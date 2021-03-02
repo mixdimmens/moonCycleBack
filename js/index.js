@@ -23,7 +23,7 @@ function trimSvgWhitespace() {
       svg.setAttribute("viewBox", viewBox);
     }
   }
-trimSvgWhitespace();
+// trimSvgWhitespace();
 
 if (div) {
     div.innerHTML = `Today: ${fullDate}`;
@@ -32,7 +32,8 @@ if (div) {
 // moon cycle calculating algorythm found on: http://www.ben-daglish.net/moon.shtml
 // returns values between 0 and 29
 function moonCycle (year, month, day) {
-    let r = year % 19;
+    let r = year % 100;
+    r %= 19;
     if (r > 9) {
         r -= 19;
     }
