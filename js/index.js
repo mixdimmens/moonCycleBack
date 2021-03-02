@@ -1,7 +1,7 @@
 // date variables
 const dateObj = new Date;
-const [date, month, year] = [dateObj.getUTCDate(), dateObj.getMonth(), dateObj.getUTCFullYear()];
-const fullDate = [date, month, year]
+const [date, month, year] = [dateObj.getDate(), dateObj.getMonth(), dateObj.getUTCFullYear()];
+const fullDate = `${date} / ${month} / ${year}`;
 
 // DOM selectors
 const dateSelector = document.getElementById('cycleDate');
@@ -26,7 +26,7 @@ function trimSvgWhitespace() {
 trimSvgWhitespace();
 
 if (div) {
-    div.innerHTML = fullDate;
+    div.innerHTML = `Today: ${fullDate}`;
 }
 
 // moon cycle calculating algorythm found on: http://www.ben-daglish.net/moon.shtml
@@ -56,28 +56,48 @@ function moonOffset (year, month, day) {
     return Math.round(cyclePhase * pixelOffsetIncrement);
 }
 
-// modify moon position 
-dateSelector.oninput = () => {
-    console.log(dateSelector.value);
+// set selectors to current date on load
+dateSelector.value = date;
+monthSelector.value = month;
+yearSelector.value = year;
+
+// modify moon position on user selections
+function setPosition () {
+    console.log(this.value);
     if (circle) {
         circle.style.left = `calc(60% + ${moonOffset(yearSelector.value, monthSelector.value, dateSelector.value) - 200}px)`;
-        console.log(moonOffset(year, month, dateSelector.value));
+        console.log(moonOffset(yearSelector.value, monthSelector.value, dateSelector.value));
+
     }
 }
 
-monthSelector.oninput = () => {
-    console.log(dateSelector.value);
-    if (circle) {
-        circle.style.left = `calc(60% + ${moonOffset(yearSelector.value, monthSelector.value, dateSelector.value) - 200}px)`;
-        console.log(moonOffset(year, month, dateSelector.value));
-    }
-}
+dateSelector.oninput = setPosition;
+monthSelector.oninput = setPosition;
+yearSelector.oninput = setPosition;
 
-yearSelector.oninput = () => {
-    console.log(dateSelector.value);
-    if (circle) {
-        circle.style.left = `calc(60% + ${moonOffset(yearSelector.value, monthSelector.value, dateSelector.value) - 200}px)`;
-        console.log(moonOffset(year, month, dateSelector.value));
-    }
-}
+// out with the old, in with the new //
+// 
+// dateSelector.oninput = () => {
+//     console.log(dateSelector.value);
+//     if (circle) {
+//         circle.style.left = `calc(60% + ${moonOffset(yearSelector.value, monthSelector.value, dateSelector.value) - 200}px)`;
+//         console.log(moonOffset(year, month, dateSelector.value));
+//     }
+// }
+
+// monthSelector.oninput = () => {
+//     console.log(dateSelector.value);
+//     if (circle) {
+//         circle.style.left = `calc(60% + ${moonOffset(yearSelector.value, monthSelector.value, dateSelector.value) - 200}px)`;
+//         console.log(moonOffset(year, month, dateSelector.value));
+//     }
+// }
+
+// yearSelector.oninput = () => {
+//     console.log(dateSelector.value);
+//     if (circle) {
+//         circle.style.left = `calc(60% + ${moonOffset(yearSelector.value, monthSelector.value, dateSelector.value) - 200}px)`;
+//         console.log(moonOffset(year, month, dateSelector.value));
+//     }
+// }
 
