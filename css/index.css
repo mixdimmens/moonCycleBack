@@ -75,3 +75,14 @@ body {
     stroke-width: 2px;
     left: calc(60% - 200px);
 }
+
+#phaseLine {
+    position: absolute;
+    top: calc(50vh - 24px);
+    left: calc(60% - 250px);
+    display: flex;
+}
+
+#newTag {
+    color: white;
+}
