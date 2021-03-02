@@ -77,30 +77,3 @@ window.onload = setPosition;
 dateSelector.oninput = setPosition;
 monthSelector.oninput = setPosition;
 yearSelector.oninput = setPosition;
-
-// out with the old, in with the new //
-// 
-// dateSelector.oninput = () => {
-//     console.log(dateSelector.value);
-//     if (circle) {
-//         circle.style.left = `calc(60% + ${moonOffset(yearSelector.value, monthSelector.value, dateSelector.value) - 200}px)`;
-//         console.log(moonOffset(year, month, dateSelector.value));
-//     }
-// }
-
-// monthSelector.oninput = () => {
-//     console.log(dateSelector.value);
-//     if (circle) {
-//         circle.style.left = `calc(60% + ${moonOffset(yearSelector.value, monthSelector.value, dateSelector.value) - 200}px)`;
-//         console.log(moonOffset(year, month, dateSelector.value));
-//     }
-// }
-
-// yearSelector.oninput = () => {
-//     console.log(dateSelector.value);
-//     if (circle) {
-//         circle.style.left = `calc(60% + ${moonOffset(yearSelector.value, monthSelector.value, dateSelector.value) - 200}px)`;
-//         console.log(moonOffset(year, month, dateSelector.value));
-//     }
-// }
-
