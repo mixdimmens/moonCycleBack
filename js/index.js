@@ -1,6 +1,6 @@
 // date variables
 const dateObj = new Date;
-const [date, month, year] = [dateObj.getDate(), dateObj.getMonth(), dateObj.getUTCFullYear()];
+const [date, month, year] = [dateObj.getDate(), dateObj.getMonth() + 1, dateObj.getUTCFullYear()];
 const fullDate = `${date} / ${month} / ${year}`;
 
 // DOM selectors
@@ -23,7 +23,7 @@ function trimSvgWhitespace() {
       svg.setAttribute("viewBox", viewBox);
     }
   }
-// trimSvgWhitespace();
+trimSvgWhitespace();
 
 if (div) {
     div.innerHTML = `Today: ${fullDate}`;
@@ -48,13 +48,13 @@ function moonCycle (year, month, day) {
 
 // modal offset of moon svg 
 function moonOffset (year, month, day) {
-    const pixelOffsetIncrement = 200 / 15;
+    const pixelOffsetIncrement = 200 / - (30/2);
     // let cyclePhase = moonCycle(year, month, date);
     let cyclePhase = moonCycle(year, month, day);
     if (cyclePhase > 15) {
         cyclePhase = 15 - (cyclePhase - 15);
     } 
-    return Math.round(cyclePhase * pixelOffsetIncrement);
+    return Math.round(cyclePhase * pixelOffsetIncrement) + 200 ;
 }
 
 // set selectors to current date on load
@@ -66,13 +66,14 @@ yearSelector.value = year;
 function setPosition () {
     console.log(this.value);
     if (circle) {
-        circle.style.left = `calc(60% + ${moonOffset(yearSelector.value, monthSelector.value, dateSelector.value) - 200}px)`;
+        circle.style.left = `calc(60% - ${moonOffset(yearSelector.value, monthSelector.value, dateSelector.value)}px)`;
         console.log(moonOffset(yearSelector.value, monthSelector.value, dateSelector.value));
     }
 }
 
 // set moon position to current date on load
 window.onload = setPosition;
+console.log(moonOffset(year, month, date));
 
 
 dateSelector.oninput = setPosition;

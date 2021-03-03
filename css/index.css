@@ -78,7 +78,7 @@ body {
 
 #phaseLine {
     position: absolute;
-    top: calc(50vh - 24px);
+    top: calc(50vh - 36px);
     left: calc(60% - 250px);
     display: flex;
 }
